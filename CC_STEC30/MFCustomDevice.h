@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Arduino.h>
-#include "MyCustomClass.h"
+#include "CC_STEC30.h"
 
 // only one entry required if you have only one custom device
 enum {
@@ -20,7 +20,7 @@ public:
 private:
     bool           getStringFromEEPROM(uint16_t addreeprom, char *buffer);
     bool           _initialized = false;
-    MyCustomClass *_mydevice;
+    CC_STEC30 *_mydevice;
     uint8_t        _pin1, _pin2, _pin3;
     uint8_t        _customType = 0;
 };
