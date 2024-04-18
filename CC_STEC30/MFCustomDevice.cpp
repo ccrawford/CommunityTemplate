@@ -70,10 +70,10 @@ void MFCustomDevice::attach(uint16_t adrPin, uint16_t adrType, uint16_t adrConfi
         is used to store the type
     ********************************************************************************** */
     getStringFromEEPROM(adrType, parameter);
-    if (strcmp(parameter, "MOBIFLIGHT_TEMPLATE") == 0)
+    if (strcmp(parameter, "CC_STEC30") == 0)
         _customType = MY_CUSTOM_DEVICE_1;
-    if (strcmp(parameter, "MOBIFLIGHT_TEMPLATE2") == 0)
-        _customType = MY_CUSTOM_DEVICE_2;
+    // if (strcmp(parameter, "MOBIFLIGHT_TEMPLATE2") == 0)
+    //     _customType = MY_CUSTOM_DEVICE_2;
 
     if (_customType == MY_CUSTOM_DEVICE_1) {
         /* **********************************************************************************
@@ -125,7 +125,7 @@ void MFCustomDevice::attach(uint16_t adrPin, uint16_t adrType, uint16_t adrConfi
         ********************************************************************************** */
         // In most cases you need only one of the following functions
         // depending on if the constuctor takes the variables or a separate function is required
-        _mydevice = new (allocateMemory(sizeof(CC_STEC30))) CC_STEC30(_pin1, _pin2);
+        _mydevice = new (allocateMemory(sizeof(CC_STEC30))) CC_STEC30();
         _mydevice->attach(Parameter1, Parameter2);
         // if your custom device does not need a separate begin() function, delete the following
         // or this function could be called from the custom constructor or attach() function
@@ -182,7 +182,7 @@ void MFCustomDevice::attach(uint16_t adrPin, uint16_t adrType, uint16_t adrConfi
         ********************************************************************************** */
         // In most cases you need only one of the following functions
         // depending on if the constuctor takes the variables or a separate function is required
-        _mydevice = new (allocateMemory(sizeof(CC_STEC30))) CC_STEC30(_pin1, _pin2);
+        _mydevice = new (allocateMemory(sizeof(CC_STEC30))) CC_STEC30();
         _mydevice->attach(Parameter1, Parameter2);
         // if your custom device does not need a separate begin() function, delete the following
         // or this function could be called from the custom constructor or attach() function

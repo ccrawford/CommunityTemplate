@@ -17,18 +17,17 @@
     "Info": {
       "CanInstallFirmware": true,
       "CanResetBoard": true,
-      "FirmwareBaseName": "mobiflight_template_raspberrypico",
+      "FirmwareBaseName": "CC_STEC30_raspberrypico",
       "FirmwareExtension": "uf2",
-      "FriendlyName": "MobiFlight Template RaspiPico",
+      "FriendlyName": "CCrawford STEC 30 RaspiPico",
       "LatestFirmwareVersion": "0.0.1",
-      "MobiFlightType": "Mobiflight Template RaspiPico",
+      "MobiFlightType": "CC_STEC30 RaspiPico",
       "ResetFirmwareFile": "reset.raspberry_pico_flash_nuke.uf2",
       "CustomDeviceTypes": [
-        "MOBIFLIGHT_TEMPLATE",
-        "MOBIFLIGHT_TEMPLATE2"
+        "CC_STEC30"
       ],
       "Community": {
-        "Project": "Your Project",
+        "Project": "CCrawford STEC 30 for A2A Comanche",
         "Website": "https://YourWebsite.com",
         "Docs": "https://YourWebsite.com",
         "Support": "https://YourWebsite.com"

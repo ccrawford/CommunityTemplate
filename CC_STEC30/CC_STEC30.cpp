@@ -7,10 +7,9 @@
     Change/add your code as needed.
 ********************************************************************************** */
 
-CC_STEC30::CC_STEC30(uint8_t Pin1, uint8_t Pin2)
+// Not passing in any pins. They will all be hardcoded for the device.
+CC_STEC30::CC_STEC30()
 {
-    _pin1 = Pin1;
-    _pin2 = Pin2;
 }
 
 void CC_STEC30::begin()

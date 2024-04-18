@@ -5,7 +5,7 @@
 class CC_STEC30
 {
 public:
-    CC_STEC30(uint8_t Pin1, uint8_t Pin2);
+    CC_STEC30();
     void begin();
     void attach(uint16_t Pin3, char *init);
     void detach();
