@@ -21,11 +21,51 @@
       {
         "id": 1,
         "label": "Set Inclinometer Ball",
-        "description": "$ set the inclinometer ball position (0 to 100, 50 is center)"
+        "description": "$ set the inclinometer ball position (-1 to 1, 0 is center)"
       },
       {
         "id": 2,
         "label": "Set AP Trim Up Light",
+        "description": "1=on, 0=off"
+      },
+      {
+        "id": 3,
+        "label": "Set AP Trim Down Light",
+        "description": "1=on, 0=off"
+      },
+      {
+        "id": 4,
+        "label": "Set AP Low Track Light",
+        "description": "1=on, 0=off"
+      },
+      {
+        "id": 5,
+        "label": "Set AP High Track Light",
+        "description": "1=on, 0=off"
+      },
+      {
+        "id": 6,
+        "label": "Set AP Stabilizer Mode Light",
+        "description": "1=on, 0=off"
+      },
+      {
+        "id": 7,
+        "label": "Set AP Ready Light",
+        "description": "1=on, 0=off"
+      },
+      {
+        "id": 8,
+        "label": "Set AP Heading Mode Light",
+        "description": "1=on, 0=off"
+      },
+      {
+        "id": 9,
+        "label": "Set AP Altitude Hold Mode Light",
+        "description": "1=on, 0=off"
+      },
+      {
+        "id": 10,
+        "label": "Set Low Voltage Flag",
         "description": "1=on, 0=off"
       }
     ]

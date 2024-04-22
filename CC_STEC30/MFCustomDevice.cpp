@@ -126,7 +126,7 @@ void MFCustomDevice::attach(uint16_t adrPin, uint16_t adrType, uint16_t adrConfi
         // In most cases you need only one of the following functions
         // depending on if the constuctor takes the variables or a separate function is required
         _mydevice = new (allocateMemory(sizeof(CC_STEC30))) CC_STEC30();
-        _mydevice->attach(Parameter1, Parameter2);
+        _mydevice->attach();
         // if your custom device does not need a separate begin() function, delete the following
         // or this function could be called from the custom constructor or attach() function
         _mydevice->begin();
@@ -183,7 +183,7 @@ void MFCustomDevice::attach(uint16_t adrPin, uint16_t adrType, uint16_t adrConfi
         // In most cases you need only one of the following functions
         // depending on if the constuctor takes the variables or a separate function is required
         _mydevice = new (allocateMemory(sizeof(CC_STEC30))) CC_STEC30();
-        _mydevice->attach(Parameter1, Parameter2);
+        _mydevice->attach();
         // if your custom device does not need a separate begin() function, delete the following
         // or this function could be called from the custom constructor or attach() function
         _mydevice->begin();
