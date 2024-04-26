@@ -26,7 +26,7 @@
       {
         "id": 2,
         "label": "Set AP Trim Up Light",
-        "description": "1=on, 0=off"
+        "description": "1=on, 0=off" 
       },
       {
         "id": 3,

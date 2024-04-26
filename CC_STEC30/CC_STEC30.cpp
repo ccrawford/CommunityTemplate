@@ -131,20 +131,22 @@ void CC_STEC30::set(int16_t messageID, char *setPoint)
     }
 }
 
+// This function will be called in a loop by Mobiflight.
 void CC_STEC30::update()
 {
-    setInclinometerBall(inclinometerBall);
-    setTurnCoordNeedle(turnCoorNeedle);
+  // Left over from testing.
+    // setInclinometerBall(inclinometerBall);
+    // setTurnCoordNeedle(turnCoorNeedle);
 
-    setApAltLight(altLedState);
-    setApHdLight(hdLedState);
-    setApRdyLight(rdyLedState);
-    setApStLight(stLedState);
-    setApTrkLoLight(trkLoLedState);
-    setApTrkHiLight(trkHiLedState);
-    setApTrimUpLight(upLedState);
-    setApTrimDownLight(downLedState);
-    setLowVoltLight(lowVoltLedState);
+    // setApAltLight(altLedState);
+    // setApHdLight(hdLedState);
+    // setApRdyLight(rdyLedState);
+    // setApStLight(stLedState);
+    // setApTrkLoLight(trkLoLedState);
+    // setApTrkHiLight(trkHiLedState);
+    // setApTrimUpLight(upLedState);
+    // setApTrimDownLight(downLedState);
+    // setLowVoltLight(lowVoltLedState);
 
     // "Clear" the screen by putting up a fresh background
     mainSpr.pushImage(0, 0, dialWidth, dialHeight, dial); 
@@ -156,6 +158,7 @@ void CC_STEC30::update()
 
     mainSpr.pushSprite(0, 0); // Push the main sprite to the screen
 }
+
 void CC_STEC30::displayLeds()
 {
   if (stLedState) mainSpr.pushImage(STDotX, STDotY, APDot_width, APDot_height, APDot);
@@ -175,6 +178,28 @@ void CC_STEC30::displayLeds()
   return;
 }
 
+void CC_STEC30::displayBall()
+{ 
+  // The multiplier below was determined by trial and error.
+  double angle = inclinometerBall*45.0;
+
+  // The parameters below were determined by trial and error. 
+  // The ramp function could be better, (it's not really linear) but not worth it.
+  ballSpr.pushToSprite(&mainSpr, mainSpr.width() / 2 + angle - 13, mainSpr.height() - ballSpr.height() - round((abs(angle) / 5)) - 22, TFT_WHITE);
+}
+
+void CC_STEC30::displayTurnCoordNeedle()
+{
+  double angle = (turnCoorNeedle - 50.0) * 1.2;   // Trial and error to get parameters
+
+  planeSpr.pushRotated( &mainSpr, (int16_t)angle, TFT_WHITE); // Push the plane sprite on the background
+
+}
+
+
+// Mobiflight will need these functions.
+
+
 // number from 0 to 100, with 50 being centered.
 void CC_STEC30::setTurnCoordNeedle(double percent)
 {
@@ -184,20 +209,6 @@ void CC_STEC30::setTurnCoordNeedle(double percent)
 void CC_STEC30::setInclinometerBall(double percent)
 {
   inclinometerBall = percent;
-}
-
-void CC_STEC30::displayBall()
-{ 
-  double angle = inclinometerBall*50.0;
-  ballSpr.pushToSprite(&mainSpr, mainSpr.width() / 2 + angle - 13, mainSpr.height() - ballSpr.height() - round((abs(angle) / 5)) - 22, TFT_WHITE);
-}
-
-void CC_STEC30::displayTurnCoordNeedle()
-{
-  double angle = (turnCoorNeedle - 50) * 0.6;
-
-  planeSpr.pushRotated( &mainSpr, (int16_t)angle, TFT_WHITE); // Push the plane sprite on the background
-
 }
 
 void CC_STEC30::setApTrimUpLight(bool state)
