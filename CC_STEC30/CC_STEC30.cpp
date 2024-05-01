@@ -6,6 +6,7 @@
 #include "dial_image.h"
 #include "plane_image.h"
 #include "ball_image.h"
+#include "knob_image.h"
 #include "LED_Images.h"
 
 TFT_eSPI tft = TFT_eSPI(); /* TFT instance */
@@ -15,6 +16,7 @@ TFT_eSprite mainSpr = TFT_eSprite(&tft); // Main sprite. Full screen.
 // The plane and the ball need to be sprites so they can be rotated and masked.
 TFT_eSprite planeSpr = TFT_eSprite(&tft); // Plane sprite
 TFT_eSprite ballSpr = TFT_eSprite(&tft);  // Turn coordinator ball sprite
+TFT_eSprite knobSpr = TFT_eSprite(&tft);  // Turn coordinator ball sprite
 
 
 /* **********************************************************************************
@@ -42,7 +44,8 @@ void CC_STEC30::begin()
     mainSpr.pushImage(0, 0, dialWidth, dialHeight, dial);
     mainSpr.pushSprite(0, 0);
 
-    mainSpr.setPivot(160, 150);                       // Set the pivot point for the rotation of the background
+    // Move this to the updater.
+    // mainSpr.setPivot(160, 150);                       // Set the pivot point for the rotation of the background
 
   // Create a sprite to hold the jpeg (or part of it)
   // CAC set impage depth.
@@ -54,6 +57,11 @@ void CC_STEC30::begin()
 
   ballSpr.createSprite(ballWidth, ballHeight);
   ballSpr.pushImage(0, 0, ballWidth, ballHeight, ball_image);
+
+  knobSpr.createSprite(knobWidth, knobHeight);
+  knobSpr.setSwapBytes(true);
+  knobSpr.setPivot(24,24);  // middle of the sprite.
+  knobSpr.pushImage(0, 0, knobWidth, knobHeight, knob_image);
 
 }
 
@@ -125,6 +133,9 @@ void CC_STEC30::set(int16_t messageID, char *setPoint)
     case 10:
         setLowVoltLight(atoi(setPoint) > 0);
         break;
+    case 11:
+        setKnobRotation(atof(setPoint));
+        break;
     
     default:
         break;
@@ -132,26 +143,15 @@ void CC_STEC30::set(int16_t messageID, char *setPoint)
 }
 
 // This function will be called in a loop by Mobiflight.
+// If you call it too frequently you will lose encoder steps.
 void CC_STEC30::update()
 {
-  // Left over from testing.
-    // setInclinometerBall(inclinometerBall);
-    // setTurnCoordNeedle(turnCoorNeedle);
-
-    // setApAltLight(altLedState);
-    // setApHdLight(hdLedState);
-    // setApRdyLight(rdyLedState);
-    // setApStLight(stLedState);
-    // setApTrkLoLight(trkLoLedState);
-    // setApTrkHiLight(trkHiLedState);
-    // setApTrimUpLight(upLedState);
-    // setApTrimDownLight(downLedState);
-    // setLowVoltLight(lowVoltLedState);
-
     // "Clear" the screen by putting up a fresh background
     mainSpr.pushImage(0, 0, dialWidth, dialHeight, dial); 
     displayBall();
     displayLeds();
+
+    displayKnob();
 
     // Do the plane last. It's on top of all the others.
     displayTurnCoordNeedle();
@@ -192,8 +192,21 @@ void CC_STEC30::displayTurnCoordNeedle()
 {
   double angle = (turnCoorNeedle - 50.0) * 1.2;   // Trial and error to get parameters
 
+  mainSpr.setPivot(160, 150);                       // Set the pivot point for the rotation of the background
+
   planeSpr.pushRotated( &mainSpr, (int16_t)angle, TFT_WHITE); // Push the plane sprite on the background
 
+}
+
+void CC_STEC30::displayKnob()
+{
+  // The multiplier below was determined by trial and error.
+  double angle = knobRotation*2.5; // -40 is about 90 degrees to the left. 
+
+  mainSpr.setPivot(knob_x, knob_y);                       // Set the pivot point for the rotation of the background
+
+  // The parameters below were determined by trial and error. 
+  knobSpr.pushRotated( &mainSpr, (int16_t)angle, TFT_WHITE); // Push the plane sprite on the background
 }
 
 
@@ -209,6 +222,12 @@ void CC_STEC30::setTurnCoordNeedle(double percent)
 void CC_STEC30::setInclinometerBall(double percent)
 {
   inclinometerBall = percent;
+}
+
+// -50 to 50 with 0 being centered. Expect increments of 5.
+void CC_STEC30::setKnobRotation(double percent)
+{
+  knobRotation = percent;
 }
 
 void CC_STEC30::setApTrimUpLight(bool state)

@@ -1,3 +1,5 @@
+print("running copy_fw_files.py")
+
 Import("env")
 import os, zipfile, shutil
 from pathlib import Path

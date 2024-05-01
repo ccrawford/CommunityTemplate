@@ -20,7 +20,7 @@
       "FirmwareBaseName": "CC_STEC30_raspberrypico",
       "FirmwareExtension": "uf2",
       "FriendlyName": "CCrawford STEC 30 RaspiPico",
-      "LatestFirmwareVersion": "0.0.1",
+      "LatestFirmwareVersion": "2.5.1",
       "MobiFlightType": "CC_STEC30 RaspiPico",
       "ResetFirmwareFile": "reset.raspberry_pico_flash_nuke.uf2",
       "CustomDeviceTypes": [

@@ -30,8 +30,12 @@ private:
     double turnCoorNeedle = 50.0; // 0 to 100, 50 is centered.
     // Ball
     double inclinometerBall = 0.0;  // -100 to 100 with 0 being centered.
+    // Knob Rotation
+    double knobRotation = 0.0; // -50 to 50 with 0 being centered.
+
     void setTurnCoordNeedle(double percent);
     void setInclinometerBall(double percent);
+    void setKnobRotation(double percent);
     void setApTrimUpLight(bool state);
     void setApTrimDownLight(bool state);
     void setApTrkLoLight(bool state);
@@ -46,4 +50,5 @@ private:
     void displayLeds();
     void displayTurnCoordNeedle();
     void displayBall();
+    void displayKnob();
 };
